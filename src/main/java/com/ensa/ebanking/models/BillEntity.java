@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "Bill")
+@Table(name = "bill")
 //lombok
 @Data
 @AllArgsConstructor
@@ -26,7 +27,19 @@ public class BillEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
     private Float amount;
-    private Integer billAccountId;
+
+    //private Integer billAccountId;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="billaccountid")
+    private BillAccountEntity billaccount;
+    /////////////////////////////////////////
+
+    /////////////// Relation ////////////////
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name="billid")
+    private List<BillFraisEntity> billfrais;
+    /////////////////////////////////////////
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

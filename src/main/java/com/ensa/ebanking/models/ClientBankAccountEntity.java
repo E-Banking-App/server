@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "client_bank_account")
+@Table(name = "clientbankaccount")
 //lombok
 @Data
 @AllArgsConstructor
@@ -22,6 +23,11 @@ public class ClientBankAccountEntity implements Serializable {
     private Integer numero;
     @Column(nullable = false)
     private String ceiling;
+    /////////////// Relation ////////////////
+    @OneToMany(mappedBy = "clientbankaccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name="clientAccountId")
+    private List<VirementEntity> virement;
+    /////////////////////////////////////////
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

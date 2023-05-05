@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "bill_penalty")
+@Table(name = "billpenalty")
 //lombok
 @Data
 @AllArgsConstructor
@@ -24,7 +24,14 @@ public class BillPenaltyEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
     private Float amount;
-    private Integer billAccountId;
+
+    //private Integer billAccountId;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="billaccountid")
+    private BillAccountEntity billaccount;
+    /////////////////////////////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

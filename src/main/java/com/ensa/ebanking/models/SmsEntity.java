@@ -21,10 +21,15 @@ public class SmsEntity implements Serializable {
     private Integer id;
     private String message;
     private String phoneNumber;
-    //not sure yet if the type is true
     private String otp;
     private Date otpExpiration;
-    private Integer billIAccountd;
+
+    //private Integer billIAccountd;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="billaccountid")
+    private BillAccountEntity billaccount;
+    /////////////////////////////////////////
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

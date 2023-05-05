@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "company")
@@ -22,6 +23,12 @@ public class CompanyEntity implements Serializable {
     private String image;
     private String name;
     private Integer accountId;
+
+    /////////////// Relation ////////////////
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name="campanyid")
+    private List<CreditorEntity> creditor;
+    /////////////////////////////////////////
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

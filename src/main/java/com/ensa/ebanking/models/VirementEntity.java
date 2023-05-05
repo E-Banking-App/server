@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "virement")
@@ -20,8 +19,21 @@ public class VirementEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String code;
-    private Integer bankAccountId;
-    private Integer clientAccountId;
+
+    //private Integer bankAccountId;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="bankAccountId")
+    private CompanyBankAccountEntity companybankaccount;
+    /////////////////////////////////////////
+
+    //private Integer clientAccountId;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="clientAccountId")
+    private ClientBankAccountEntity clientbankaccount;
+    /////////////////////////////////////////
+
     private Float amountSent;
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();

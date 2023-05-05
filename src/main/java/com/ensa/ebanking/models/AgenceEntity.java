@@ -21,7 +21,14 @@ public class AgenceEntity implements Serializable {
     private Integer id;
     @Column(nullable = false)
     private String name;
-    private Integer createdBy;
+
+    //private Integer createdBy;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="createdBy")
+    private AdminEntity admin;
+    /////////////////////////////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

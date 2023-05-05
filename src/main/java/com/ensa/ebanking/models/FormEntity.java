@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "Form")
+@Table(name = "form")
 //lombok
 @Data
 @AllArgsConstructor

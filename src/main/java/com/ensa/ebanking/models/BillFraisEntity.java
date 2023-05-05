@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "bill_frais")
+@Table(name = "billfrais")
 //lombok
 @Data
 @AllArgsConstructor
@@ -21,7 +21,13 @@ public class BillFraisEntity implements Serializable {
     private Integer id;
     private String name;
     private Float amount;
-    private Integer billId;
+
+    //private Integer billId;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="billid")
+    private BillEntity bill;
+    /////////////////////////////////////////
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
