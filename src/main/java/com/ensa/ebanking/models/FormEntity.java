@@ -22,6 +22,12 @@ public class FormEntity implements Serializable {
     private String types;
     private String names;
     private String placeholders;
+
+    /////////////// Relation ////////////////
+    @OneToOne(mappedBy = "form", cascade = CascadeType.ALL,fetch = FetchType.LAZY )
+    private CreanceEntity creance;
+    /////////////// //////// ////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

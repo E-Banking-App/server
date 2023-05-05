@@ -22,12 +22,19 @@ public class CompanyEntity implements Serializable {
     private Integer id;
     private String image;
     private String name;
-    private Integer accountId;
+
+    //private Integer accountid;
+    /////////////// Relation ////////////////
+    @OneToOne
+    @JoinColumn(name = "accountid")
+    private CompanyBankAccountEntity companybankaccount;
+    /////////////// //////// ////////////////
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CreditorEntity> creditor;
     /////////////////////////////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

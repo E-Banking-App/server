@@ -31,12 +31,13 @@ public class ClientEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role = Role.CLIENT;
     private Integer createdBy;
-    private Integer accountId;
 
-//    @OneToMany(mappedBy = "client_bank_account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name="clientid")
-//    private List<ClientBankAccountEntity> accountId;
-
+    //private Integer accountid;
+    /////////////// Relation ////////////////
+    @OneToOne
+    @JoinColumn(name = "accountid")
+    private ClientBankAccountEntity clientbankaccount;
+    /////////////// //////// ////////////////
 
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();

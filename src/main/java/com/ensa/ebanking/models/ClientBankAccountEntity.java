@@ -27,6 +27,12 @@ public class ClientBankAccountEntity implements Serializable {
     @OneToMany(mappedBy = "clientbankaccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VirementEntity> virement;
     /////////////////////////////////////////
+
+    /////////////// Relation ////////////////
+    @OneToOne(mappedBy = "clientbankaccount", cascade = CascadeType.ALL,fetch = FetchType.LAZY )
+    private ClientEntity client;
+    /////////////// //////// ////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
