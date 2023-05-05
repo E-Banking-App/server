@@ -23,7 +23,6 @@ public class CompanyBankAccountEntity implements Serializable {
     private String numero;
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "companybankaccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="bankAccountId")
     private List<VirementEntity> virement;
     /////////////////////////////////////////
     @Column(nullable = false)

@@ -20,14 +20,12 @@ public class VirementEntity implements Serializable {
     private Integer id;
     private String code;
 
-    //private Integer bankAccountId;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="bankAccountId")
     private CompanyBankAccountEntity companybankaccount;
     /////////////////////////////////////////
 
-    //private Integer clientAccountId;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="clientAccountId")

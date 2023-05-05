@@ -33,7 +33,6 @@ public class AdminEntity implements Serializable {
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="createdBy")
     private List<AgenceEntity> agence;
     /////////////////////////////////////////
 

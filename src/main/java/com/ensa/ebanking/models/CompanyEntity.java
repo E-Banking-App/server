@@ -26,7 +26,6 @@ public class CompanyEntity implements Serializable {
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="campanyid")
     private List<CreditorEntity> creditor;
     /////////////////////////////////////////
     @Column(nullable = false)

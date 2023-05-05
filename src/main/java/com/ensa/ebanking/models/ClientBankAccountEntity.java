@@ -25,7 +25,6 @@ public class ClientBankAccountEntity implements Serializable {
     private String ceiling;
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "clientbankaccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="clientAccountId")
     private List<VirementEntity> virement;
     /////////////////////////////////////////
     @Column(nullable = false)

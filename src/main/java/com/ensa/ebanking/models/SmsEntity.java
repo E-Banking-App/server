@@ -24,7 +24,6 @@ public class SmsEntity implements Serializable {
     private String otp;
     private Date otpExpiration;
 
-    //private Integer billIAccountd;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="billaccountid")

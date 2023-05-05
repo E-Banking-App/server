@@ -26,7 +26,7 @@ public class CreditorEntity implements Serializable {
     private String name;
     @Enumerated(EnumType.STRING)
     private Category category;
-    //private Integer campanyid;
+
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="campanyid")
@@ -35,13 +35,11 @@ public class CreditorEntity implements Serializable {
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "creditor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="creditorid")
     private List<CreanceEntity> creance;
     /////////////////////////////////////////
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "creditor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="creditorid")
     private List<BillAccountEntity> billaccount;
     /////////////////////////////////////////
 

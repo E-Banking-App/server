@@ -25,7 +25,6 @@ public class BillPenaltyEntity implements Serializable {
     private Status status;
     private Float amount;
 
-    //private Integer billAccountId;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="billaccountid")

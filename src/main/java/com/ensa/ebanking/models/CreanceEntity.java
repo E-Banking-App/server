@@ -23,7 +23,7 @@ public class CreanceEntity implements Serializable {
     @Column(unique = true)
     private String code;
     private String name;
-    //private Integer creditorid;
+
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="creditorid")
@@ -32,7 +32,6 @@ public class CreanceEntity implements Serializable {
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "creance", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="creanceid")
     private List<BillAccountEntity> billaccount;
     /////////////////////////////////////////
     private Integer formId;

@@ -22,7 +22,6 @@ public class AgenceEntity implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    //private Integer createdBy;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="createdBy")

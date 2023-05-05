@@ -28,7 +28,6 @@ public class BillEntity implements Serializable {
     private Status status;
     private Float amount;
 
-    //private Integer billAccountId;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="billaccountid")
@@ -37,7 +36,6 @@ public class BillEntity implements Serializable {
 
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name="billid")
     private List<BillFraisEntity> billfrais;
     /////////////////////////////////////////
     @Column(nullable = false)

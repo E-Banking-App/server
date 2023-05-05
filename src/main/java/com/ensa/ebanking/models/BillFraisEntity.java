@@ -22,7 +22,6 @@ public class BillFraisEntity implements Serializable {
     private String name;
     private Float amount;
 
-    //private Integer billId;
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="billid")
