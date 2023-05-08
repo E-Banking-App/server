@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,7 +16,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminEntity implements Serializable {
+@DiscriminatorValue("ADMIN")
+public class AdminEntity extends User implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

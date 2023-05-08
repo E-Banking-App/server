@@ -16,7 +16,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgentEntity implements Serializable {
+@DiscriminatorValue("AGENT")
+public class AgentEntity extends User implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
