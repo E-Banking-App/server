@@ -35,10 +35,24 @@ public class AgentEntity implements Serializable {
     private Boolean isFirstLogin=true;
     @Enumerated(EnumType.STRING)
     private Role role = Role.AGENT;
-    private Integer createdBy;
-    private Integer agenceId;
+
+    //private Integer createdby;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="createdby")
+    private AdminEntity admin;
+    /////////////////////////////////////////
+
+    //private Integer agenceid;
+    /////////////// Relation ////////////////
+    @ManyToOne
+    @JoinColumn(name="agenceid")
+    private AgenceEntity agence;
+    /////////////////////////////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
 }

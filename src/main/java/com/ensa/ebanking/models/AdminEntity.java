@@ -36,6 +36,11 @@ public class AdminEntity implements Serializable {
     private List<AgenceEntity> agence;
     /////////////////////////////////////////
 
+    /////////////// Relation ////////////////
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AgentEntity> Agent;
+    /////////////////////////////////////////
+
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
