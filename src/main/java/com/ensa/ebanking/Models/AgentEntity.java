@@ -1,0 +1,65 @@
+package com.ensa.ebanking.Models;
+
+import com.ensa.ebanking.Enums.Role;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Entity
+@Table(name = "agent")
+//lombok
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class AgentEntity implements Serializable {
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(nullable = false, unique = true)
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String cin;
+    private String cinLink;
+    private String location;
+    private LocalDate birthDate;
+    private String phoneNumber;
+    private String irc;
+    private String ice;
+    private Boolean isFirstLogin=true;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.AGENT;
+    @ManyToOne
+    @JoinColumn(name="createdBy")
+    private AdminEntity admin;
+    @ManyToOne
+    @JoinColumn(name="agenceId")
+    private AgenceEntity agence;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt = LocalDateTime.now();
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    public AgentEntity(String email, String password, String firstName, String lastName, String cin, String cinLink, String location, LocalDate birthDate, String phoneNumber, String irc, String ice, AdminEntity admin, AgenceEntity agence) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cin = cin;
+        this.cinLink = cinLink;
+        this.location = location;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
+        this.irc = irc;
+        this.ice = ice;
+        this.admin = admin;
+        this.agence = agence;
+    }
+}
