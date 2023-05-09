@@ -28,7 +28,15 @@ public class ClientEntity implements Serializable {
     private Boolean isFirstLogin = true;
     @Enumerated(EnumType.STRING)
     private Role role = Role.CLIENT;
-    private Integer createdBy;
+
+    //private Integer createdBy;
+    /////////////// GFK ////////////////
+    /////////////// /// ////////////////
+    @ManyToOne
+    @JoinColumn(name = "createdby")
+    private User createdBy;
+    /////////////// /// ////////////////
+    /////////////// /// ////////////////
 
     //private Integer accountid;
     /////////////// Relation ////////////////

@@ -16,7 +16,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminEntity implements Serializable {
+@DiscriminatorValue("ADMIN")
+public class AdminEntity extends User implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,6 +34,11 @@ public class AdminEntity implements Serializable {
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AgenceEntity> agence;
+    /////////////////////////////////////////
+
+    /////////////// Relation ////////////////
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AgentEntity> Agent;
     /////////////////////////////////////////
 
     @Column(nullable = false)

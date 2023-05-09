@@ -1,13 +1,12 @@
-package com.ensa.ebanking.Models;
+package com.ensa.ebanking.models;
 
-import com.ensa.ebanking.Enums.Role;
+import com.ensa.ebanking.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -29,37 +28,17 @@ public class AgentEntity implements Serializable {
     private String cin;
     private String cinLink;
     private String location;
-    private LocalDate birthDate;
+    private Date birthDate;
     private String phoneNumber;
     private String irc;
     private String ice;
     private Boolean isFirstLogin=true;
     @Enumerated(EnumType.STRING)
     private Role role = Role.AGENT;
-    @ManyToOne
-    @JoinColumn(name="createdBy")
-    private AdminEntity admin;
-    @ManyToOne
-    @JoinColumn(name="agenceId")
-    private AgenceEntity agence;
+    private Integer createdBy;
+    private Integer agenceId;
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
-
-    public AgentEntity(String email, String password, String firstName, String lastName, String cin, String cinLink, String location, LocalDate birthDate, String phoneNumber, String irc, String ice, AdminEntity admin, AgenceEntity agence) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.cin = cin;
-        this.cinLink = cinLink;
-        this.location = location;
-        this.birthDate = birthDate;
-        this.phoneNumber = phoneNumber;
-        this.irc = irc;
-        this.ice = ice;
-        this.admin = admin;
-        this.agence = agence;
-    }
 }
