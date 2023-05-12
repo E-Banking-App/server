@@ -1,4 +1,4 @@
-package com.ensa.ebanking.models;
+package com.ensa.ebanking.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

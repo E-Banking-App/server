@@ -1,6 +1,5 @@
 package com.ensa.ebanking;
 
-import com.ensa.ebanking.Enums.Role;
 import com.ensa.ebanking.Models.AdminEntity;
 import com.ensa.ebanking.Models.AgenceEntity;
 import com.ensa.ebanking.Models.AgentEntity;
@@ -14,7 +13,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class EBankingApplication {
