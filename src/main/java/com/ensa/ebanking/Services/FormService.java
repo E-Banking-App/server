@@ -12,5 +12,5 @@ public class FormService {
     public FormService(FormDAO formDAO) {
         this.formDAO = formDAO;
     }
-    public FormEntity addForm(FormEntity formEntity) { return formDAO.save(formEntity);}
+    public FormEntity createForm(FormEntity formEntity) { return formDAO.save(formEntity);}
 }

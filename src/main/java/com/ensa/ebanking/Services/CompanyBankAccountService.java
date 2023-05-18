@@ -12,5 +12,5 @@ public class CompanyBankAccountService {
     public CompanyBankAccountService(CompanyBankAccountDAO companyBankAccountDAO) {
         this.companyBankAccountDAO = companyBankAccountDAO;
     }
-    public CompanyBankAccountEntity addCompanyBankAccount(CompanyBankAccountEntity companyBankAccountEntity) { return companyBankAccountDAO.save(companyBankAccountEntity);}
+    public CompanyBankAccountEntity createCompanyBankAccount(CompanyBankAccountEntity companyBankAccountEntity) { return companyBankAccountDAO.save(companyBankAccountEntity);}
 }

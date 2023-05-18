@@ -12,5 +12,5 @@ public class BillFraisService {
     public BillFraisService(BillFraisDAO billFraisDAO) {
         this.billFraisDAO = billFraisDAO;
     }
-    public BillFraisEntity addBillFrais(BillFraisEntity billFraisEntity) { return billFraisDAO.save(billFraisEntity);}
+    public BillFraisEntity createBillFrais(BillFraisEntity billFraisEntity) { return billFraisDAO.save(billFraisEntity);}
 }

@@ -13,5 +13,5 @@ public class CreditorService {
         this.creditorDAO = creditorDAO;
     }
 
-    public CreditorEntity addCreditor(CreditorEntity creditorEntity) { return creditorDAO.save(creditorEntity);}
+    public CreditorEntity createCreditor(CreditorEntity creditorEntity) { return creditorDAO.save(creditorEntity);}
 }

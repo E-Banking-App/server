@@ -12,5 +12,5 @@ public class ClientBankAccountService {
     public ClientBankAccountService(ClientBankAccountDAO clientBankAccountDAO) {
         this.clientBankAccountDAO = clientBankAccountDAO;
     }
-    public ClientBankAccountEntity addClientBankAccount(ClientBankAccountEntity clientBankAccountEntity) { return clientBankAccountDAO.save(clientBankAccountEntity);}
+    public ClientBankAccountEntity createClientBankAccount(ClientBankAccountEntity clientBankAccountEntity) { return clientBankAccountDAO.save(clientBankAccountEntity);}
 }

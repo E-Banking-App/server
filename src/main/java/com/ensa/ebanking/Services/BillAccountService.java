@@ -12,5 +12,5 @@ public class BillAccountService {
     public BillAccountService(BillAccountDAO billAccountDAO) {
         this.billAccountDAO = billAccountDAO;
     }
-    public BillAccountEntity addBillAccount(BillAccountEntity billAccountEntity) { return billAccountDAO.save(billAccountEntity);}
+    public BillAccountEntity createBillAccount(BillAccountEntity billAccountEntity) { return billAccountDAO.save(billAccountEntity);}
 }

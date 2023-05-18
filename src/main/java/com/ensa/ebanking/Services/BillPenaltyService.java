@@ -12,5 +12,5 @@ public class BillPenaltyService {
     public BillPenaltyService(BillPenaltyDAO billPenaltyDAO) {
         this.billPenaltyDAO = billPenaltyDAO;
     }
-    public BillPenaltyEntity addBillPenalty(BillPenaltyEntity billPenaltyEntity) { return billPenaltyDAO.save(billPenaltyEntity);}
+    public BillPenaltyEntity createBillPenalty(BillPenaltyEntity billPenaltyEntity) { return billPenaltyDAO.save(billPenaltyEntity);}
 }

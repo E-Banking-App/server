@@ -23,13 +23,13 @@ public class VirementEntity implements Serializable {
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="bankAccountId")
-    private CompanyBankAccountEntity companybankaccount;
+    private CompanyBankAccountEntity companyBankAccount;
     /////////////////////////////////////////
 
     /////////////// Relation ////////////////
     @ManyToOne
     @JoinColumn(name="clientAccountId")
-    private ClientBankAccountEntity clientbankaccount;
+    private ClientBankAccountEntity clientBankAccount;
     /////////////////////////////////////////
 
     private Float amountSent;

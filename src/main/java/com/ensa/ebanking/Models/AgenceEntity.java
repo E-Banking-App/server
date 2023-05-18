@@ -33,7 +33,6 @@ public class AgenceEntity implements Serializable {
     private List<AgentEntity> agent;
     /////////////////////////////////////////
 
-
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)

@@ -14,5 +14,5 @@ public class BillService {
         this.billDAO = billDAO;
     }
 
-    public BillEntity addBill(BillEntity billEntity) { return billDAO.save(billEntity);}
+    public BillEntity createBill(BillEntity billEntity) { return billDAO.save(billEntity);}
 }

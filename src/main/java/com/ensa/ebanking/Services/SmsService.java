@@ -12,5 +12,5 @@ public class SmsService {
     public SmsService(SmsDAO smsDAO) {
         this.smsDAO = smsDAO;
     }
-    public SmsEntity addSms(SmsEntity smsEntity) { return smsDAO.save(smsEntity);}
+    public SmsEntity createSms(SmsEntity smsEntity) { return smsDAO.save(smsEntity);}
 }

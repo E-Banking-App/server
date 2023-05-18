@@ -25,8 +25,8 @@ public class CompanyEntity implements Serializable {
     //private Integer accountid;
     /////////////// Relation ////////////////
     @OneToOne
-    @JoinColumn(name = "accountid")
-    private CompanyBankAccountEntity companybankaccount;
+    @JoinColumn(name = "accountId")
+    private CompanyBankAccountEntity companyBankAccount;
     /////////////// //////// ////////////////
 
     /////////////// Relation ////////////////
@@ -38,4 +38,10 @@ public class CompanyEntity implements Serializable {
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public CompanyEntity(String image, String name, CompanyBankAccountEntity companyBankAccount) {
+        this.image = image;
+        this.name = name;
+        this.companyBankAccount = companyBankAccount;
+    }
 }

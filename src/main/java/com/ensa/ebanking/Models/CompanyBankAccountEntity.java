@@ -19,14 +19,14 @@ public class CompanyBankAccountEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String numero;
+    private Integer numero;
     /////////////// Relation ////////////////
-    @OneToMany(mappedBy = "companybankaccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "companyBankAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VirementEntity> virement;
     /////////////////////////////////////////
 
     /////////////// Relation ////////////////
-    @OneToOne(mappedBy = "companybankaccount", cascade = CascadeType.ALL,fetch = FetchType.LAZY )
+    @OneToOne(mappedBy = "companyBankAccount", cascade = CascadeType.ALL,fetch = FetchType.LAZY )
     private CompanyEntity company;
     /////////////// //////// ////////////////
 
@@ -34,4 +34,8 @@ public class CompanyBankAccountEntity implements Serializable {
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public CompanyBankAccountEntity(Integer numero) {
+        this.numero = numero;
+    }
 }

@@ -46,4 +46,11 @@ public class CreditorEntity implements Serializable {
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public CreditorEntity(String code, String name, Category category, CompanyEntity company) {
+        this.code = code;
+        this.name = name;
+        this.category = category;
+        this.company = company;
+    }
 }

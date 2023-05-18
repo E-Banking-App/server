@@ -12,5 +12,5 @@ public class AgenceService {
     public AgenceService(AgenceDAO agenceDTO) {
         this.agenceDTO = agenceDTO;
     }
-    public AgenceEntity addAgence(AgenceEntity agenceEntity) { return agenceDTO.save(agenceEntity);}
+    public AgenceEntity createAgence(AgenceEntity agenceEntity) { return agenceDTO.save(agenceEntity);}
 }

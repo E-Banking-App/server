@@ -12,5 +12,5 @@ public class CompanyService {
     public CompanyService(CompanyDAO companyDAO) {
         this.companyDAO = companyDAO;
     }
-    public CompanyEntity addCompany(CompanyEntity companyEntity) { return companyDAO.save(companyEntity);}
+    public CompanyEntity createCompany(CompanyEntity companyEntity) { return companyDAO.save(companyEntity);}
 }
