@@ -9,6 +9,8 @@ import com.ensa.ebanking.Models.ClientEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -34,7 +36,13 @@ public class UserService {
     public AdminEntity createAdmin(AdminEntity admin) {
         return adminDTO.save(admin);
     }
-
+    public void deleteAdmin(Long id) {
+        adminDTO.deleteById(id);
+    }
+    public List<AdminEntity> getAdmins() {
+        List<AdminEntity> admins = adminDTO.findAll();
+        return admins;
+    }
     public AgentEntity createAgent(AgentEntity agent) {
         return agentDTO.save(agent);
     }

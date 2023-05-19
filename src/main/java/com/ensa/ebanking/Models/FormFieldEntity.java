@@ -20,7 +20,6 @@ public class FormFieldEntity {
     private String name;
     private String placeholder;
     private String type;
-
     @ManyToOne
     @JoinColumn(name="formId")
     private FormEntity form;
