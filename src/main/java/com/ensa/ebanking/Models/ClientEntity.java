@@ -2,9 +2,7 @@ package com.ensa.ebanking.Models;
 
 import com.ensa.ebanking.Enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -50,6 +48,10 @@ import java.time.LocalDateTime;
 //    @Column(nullable = false)
 //    private LocalDateTime createdAt = LocalDateTime.now();
 //}
+@EqualsAndHashCode(callSuper = true)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "client")
 @Entity
 public class ClientEntity extends UserEntity {
@@ -82,7 +84,4 @@ public class ClientEntity extends UserEntity {
         this.clientBankAccount = clientBankAccount;
     }
 
-    public ClientEntity() {
-
-    }
 }

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class BillPenaltyEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
     private Status status;

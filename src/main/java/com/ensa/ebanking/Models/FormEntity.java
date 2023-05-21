@@ -18,7 +18,7 @@ import java.util.List;
 public class FormEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @OneToMany(mappedBy = "form", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<FormFieldEntity> formFields;
     /////////////// Relation ////////////////

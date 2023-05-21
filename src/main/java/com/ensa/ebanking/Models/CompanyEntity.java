@@ -18,7 +18,7 @@ import java.util.List;
 public class CompanyEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String image;
     private String name;
 

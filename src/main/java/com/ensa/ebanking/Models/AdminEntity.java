@@ -52,6 +52,9 @@ import java.util.List;
 
 @Table(name = "admin")
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AdminEntity extends UserEntity {
     private String firstName;
     private String lastName;
@@ -76,7 +79,4 @@ public class AdminEntity extends UserEntity {
     }
 
 
-    public AdminEntity() {
-
-    }
 }

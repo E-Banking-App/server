@@ -73,6 +73,7 @@ import java.time.LocalDateTime;
 
 @Table(name = "agent")
 @Entity
+@Data
 public class AgentEntity extends UserEntity {
     private String firstName;
     private String lastName;
