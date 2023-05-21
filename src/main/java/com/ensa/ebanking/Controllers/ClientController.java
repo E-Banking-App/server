@@ -1,5 +1,6 @@
 package com.ensa.ebanking.Controllers;
 
+import com.ensa.ebanking.Auth.PasswordGenerator;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
 import com.ensa.ebanking.Services.UserService;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("clients")
+@RequestMapping("client")
+@CrossOrigin
 @AllArgsConstructor
 public class ClientController {
     private UserService clientService;
@@ -21,6 +23,9 @@ public class ClientController {
 
     @PostMapping("")
     public ClientResponseDto saveClient(@RequestBody ClientRequestDto clientRequestDto){
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+        String password = passwordGenerator.generateRandomPassword();
+        clientRequestDto.setPassword(password);
         return clientService.saveClient(clientRequestDto);
     }
 }

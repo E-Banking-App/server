@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("agency")
+@CrossOrigin
 @AllArgsConstructor
 public class AgenceController {
     private final AgenceService agenceService;
