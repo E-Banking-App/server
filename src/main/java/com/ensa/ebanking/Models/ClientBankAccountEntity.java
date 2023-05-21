@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ClientBankAccountEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private Integer numero;
     @Column(nullable = false)
     private String ceiling;
@@ -33,6 +34,7 @@ public class ClientBankAccountEntity implements Serializable {
     /////////////// //////// ////////////////
 
     @Column(nullable = false)
+    //@CreationTimestamp
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

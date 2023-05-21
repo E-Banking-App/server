@@ -18,7 +18,7 @@ import java.util.Date;
 public class SmsEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String message;
     private String phoneNumber;
     private String otp;

@@ -18,7 +18,7 @@ import java.util.List;
 public class CreanceEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(unique = true)
     private String code;
     private String name;

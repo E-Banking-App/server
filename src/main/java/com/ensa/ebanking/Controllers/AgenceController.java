@@ -1,8 +1,13 @@
 package com.ensa.ebanking.Controllers;
 
+import com.ensa.ebanking.DTO.Agence.AgenceRequestDto;
+import com.ensa.ebanking.DTO.Agence.AgenceResponseDto;
+import com.ensa.ebanking.DTO.Agent.AgentRequestDto;
+import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
 import com.ensa.ebanking.Models.AdminEntity;
 import com.ensa.ebanking.Models.AgenceEntity;
 import com.ensa.ebanking.Services.AgenceService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,24 +16,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("agency")
+@AllArgsConstructor
 public class AgenceController {
-    @Autowired
     private final AgenceService agenceService;
-
-    public AgenceController(AgenceService agenceService) {
-        this.agenceService = agenceService;
+    @PostMapping("")
+    public AgenceResponseDto saveAgence(@RequestBody AgenceRequestDto agenceRequestDto){
+        return agenceService.saveAgence(agenceRequestDto);
     }
-
-    @PostMapping("/agency")
-    public void addAgency(@RequestBody AgenceEntity agency){
-        agenceService.createAgence(agency);
+    @GetMapping("")
+    public List<AgenceResponseDto> getAgence(){
+        return agenceService.findAllAgence();
     }
-    @GetMapping("/agency")
-    public ResponseEntity<List<AgenceEntity>> getAgencies(){
-        return new ResponseEntity<>(agenceService.getAgencies(), HttpStatus.OK);
-    }
-    @DeleteMapping("/agency/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteAgence(@PathVariable("id") Long id) {
         agenceService.deleteAgence(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

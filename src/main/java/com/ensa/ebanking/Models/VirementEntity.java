@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class VirementEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String code;
 
     /////////////// Relation ////////////////

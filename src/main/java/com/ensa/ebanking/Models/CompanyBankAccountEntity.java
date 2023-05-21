@@ -18,7 +18,7 @@ import java.util.List;
 public class CompanyBankAccountEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private Integer numero;
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "companyBankAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

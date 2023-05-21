@@ -3,11 +3,13 @@ package com.ensa.ebanking;
 import com.ensa.ebanking.Enums.Category;
 import com.ensa.ebanking.Models.*;
 import com.ensa.ebanking.Services.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.ui.ModelMap;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -78,6 +80,11 @@ public class EBankingApplication {
 			creanceService.createCreance(creance3);
 			creanceService.createCreance(creance4);
 		};
+	}
+
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
 	}
 
 }

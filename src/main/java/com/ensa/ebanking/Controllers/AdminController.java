@@ -1,31 +1,29 @@
 package com.ensa.ebanking.Controllers;
 
-import com.ensa.ebanking.Models.AdminEntity;
+import com.ensa.ebanking.DTO.Admin.AdminRequestDto;
+import com.ensa.ebanking.DTO.Admin.AdminResponseDto;
 import com.ensa.ebanking.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("admin")
+@AllArgsConstructor
 public class AdminController {
-    @Autowired
     private final UserService adminService;
-    public AdminController(UserService adminService) {
-        this.adminService = adminService;
+    @GetMapping("")
+    public List<AdminResponseDto> getAdmin(){
+        return adminService.findAllAdmin();
     }
-    @PostMapping("/admin")
-    public void addAdmin(@RequestBody AdminEntity admin){
-        adminService.createAdmin(admin);
+    @PostMapping("")
+    public AdminResponseDto saveAdmin(@RequestBody AdminRequestDto adminRequestDto){
+        return adminService.saveAdmin(adminRequestDto);
     }
-    @GetMapping("/admin")
-    public ResponseEntity<List<AdminEntity>> getAdmins(){
-        return new ResponseEntity<>(adminService.getAdmins(), HttpStatus.OK);
-    }
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteAdmin(@PathVariable("id") Long id) {
         adminService.deleteAdmin(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
