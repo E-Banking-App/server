@@ -75,6 +75,8 @@ public class ClientEntity extends UserEntity {
     @JoinColumn(name = "accountId")
     private ClientBankAccountEntity clientBankAccount;
 
+    private boolean FirstLogin= true  ;
+
     public ClientEntity(String username, String password, String firstName, String lastName, String email, UserEntity createdBy, ClientBankAccountEntity clientBankAccount) {
         super(username, password);
         this.firstName = firstName;
