@@ -3,9 +3,13 @@ package com.ensa.ebanking.Models;
 import com.ensa.ebanking.Enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 //@Entity
 //@Table(name = "client")
@@ -54,6 +58,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "client")
 @Entity
+@Builder
 public class ClientEntity extends UserEntity {
     private String firstName;
     private String lastName;
@@ -83,5 +88,14 @@ public class ClientEntity extends UserEntity {
         this.createdBy = createdBy;
         this.clientBankAccount = clientBankAccount;
     }
+    public ClientEntity(String username, String password) {
+        super(username, password);
+        this.firstName = firstName;
 
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
 }

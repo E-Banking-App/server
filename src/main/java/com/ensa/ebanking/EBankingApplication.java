@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
 
 import java.time.LocalDate;
@@ -16,6 +18,7 @@ import java.util.Arrays;
 
 @SpringBootApplication
 public class EBankingApplication {
+	PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EBankingApplication.class, args);
@@ -25,7 +28,8 @@ public class EBankingApplication {
 	CommandLineRunner run(AgenceService agenceService, UserService userService, ClientBankAccountService clientBankAccountService, CompanyBankAccountService companyBankAccountService, CompanyService companyService, CreditorService creditorService, FormService formService, CreanceService creanceService, BillService billService, BillAccountService billAccountService, BillPenaltyService billPenaltyService, BillFraisService billFraisService, FormFieldService formFieldService) {
 		return args -> {
 			// Add Default Admin On Initialization
-			AdminEntity admin = new AdminEntity("admin@ensa.ma", "password", "first name", "last name", "0600000000");
+			this.passwordEncoder = new BCryptPasswordEncoder();//to encrypte the password
+			AdminEntity admin = new AdminEntity("admin@ensa.ma",  passwordEncoder.encode("password"), "first name", "last name", "0600000000");
 			userService.createAdmin(admin);
 			// Add Default Agencies On Initialization
 			AgenceEntity agence1 = new AgenceEntity("agence 1", admin);
@@ -33,7 +37,8 @@ public class EBankingApplication {
 			agenceService.createAgence(agence1);
 			agenceService.createAgence(agence2);
 			// Add Default Agents On Initialization
-			AgentEntity agent1 = new AgentEntity("agent1@ensa.ma", "password", "first name", "last name", "EE000000", "/cin/EE000000", "location", LocalDate.now(), "0600000000", "irc", "ice", admin, agence1);
+
+			AgentEntity agent1 = new AgentEntity("agent1@ensa.ma", passwordEncoder.encode("password"), "first name", "last name", "EE000000", "/cin/EE000000", "location", LocalDate.now(), "0600000000", "irc", "ice", admin, agence1);
 			AgentEntity agent2 = new AgentEntity("agent2@ensa.ma", "password", "first name", "last name", "EE000001", "/cin/EE000001", "location", LocalDate.now(), "0600000001", "irc", "ice", admin, agence2);
 			userService.createAgent(agent1);
 			userService.createAgent(agent2);
