@@ -1,4 +1,4 @@
-package com.ensa.ebanking.aut;
+package com.ensa.ebanking.Auth;
 
 
 import com.ensa.ebanking.DAO.AdminDAO;
@@ -8,7 +8,7 @@ import com.ensa.ebanking.DAO.UserRepository;
 import com.ensa.ebanking.Models.AdminEntity;
 import com.ensa.ebanking.Models.AgentEntity;
 import com.ensa.ebanking.Models.ClientEntity;
-import com.ensa.ebanking.conf.JwtService;
+import com.ensa.ebanking.Security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +26,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse adminRegister(RegisterRequest request){
+    public AuthenticationResponse adminRegister(PasswordGenerator.RegisterRequest request){
         AdminEntity user =new AdminEntity(request.getUsername(),passwordEncoder.encode(request.getPassword()));
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -34,7 +34,7 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-    public AuthenticationResponse agentRegister(RegisterRequest request){
+    public AuthenticationResponse agentRegister(PasswordGenerator.RegisterRequest request){
         AgentEntity user =new AgentEntity(request.getUsername(),passwordEncoder.encode(request.getPassword()));
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -42,7 +42,7 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-    public AuthenticationResponse clientRegister(RegisterRequest request){
+    public AuthenticationResponse clientRegister(PasswordGenerator.RegisterRequest request){
         ClientEntity user =new ClientEntity(request.getUsername(),passwordEncoder.encode(request.getPassword()));
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);

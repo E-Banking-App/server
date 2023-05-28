@@ -1,5 +1,10 @@
 package com.ensa.ebanking.Auth;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.security.SecureRandom;
 
 public class PasswordGenerator {
@@ -19,4 +24,12 @@ public class PasswordGenerator {
         return sb.toString();
     }
 
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class RegisterRequest {
+        private String password;
+        private String username;
+    }
 }

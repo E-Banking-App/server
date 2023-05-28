@@ -1,4 +1,4 @@
-package com.ensa.ebanking.conf;
+package com.ensa.ebanking.Security;
 
 import com.ensa.ebanking.DAO.UserRepository;
 import lombok.RequiredArgsConstructor;

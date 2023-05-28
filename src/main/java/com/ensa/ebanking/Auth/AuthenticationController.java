@@ -1,15 +1,17 @@
-package com.ensa.ebanking.aut;
+package com.ensa.ebanking.Auth;
 
+import com.ensa.ebanking.Auth.AuthenticationRequest;
+import com.ensa.ebanking.Auth.AuthenticationResponse;
+import com.ensa.ebanking.Auth.AuthenticationService;
+import com.ensa.ebanking.Auth.PasswordGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin
 public class AuthenticationController {
     private final AuthenticationService service;
 //    @PostMapping("/register")
@@ -20,7 +22,7 @@ public class AuthenticationController {
 //    }
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+            @RequestBody PasswordGenerator.RegisterRequest request
             ){
         return ResponseEntity.ok(service.adminRegister(request));
     }

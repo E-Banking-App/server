@@ -1,4 +1,4 @@
-package com.ensa.ebanking.conf;
+package com.ensa.ebanking.Security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
