@@ -8,4 +8,7 @@ public interface ClientDAO extends JpaRepository<ClientEntity, Long> {
     ClientEntity findByEmail(String email);
 
     ClientEntity save(ClientEntity client);
+
+    ClientEntity findByFirstName(String firstname);
 }
+

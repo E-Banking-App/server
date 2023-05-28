@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://www.ensa.com/ebanking/Soap/Solde"
+                  xmlns:tns="http://www.ensa.com/ebanking/Soap/Solde">
+
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ensa.com/ebanking/Soap/Solde">
+            <xs:element name="ConsultationSoldeRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="firstName" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ConsultationSoldeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="balance" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="ConsultationSoldeRequest">
+        <wsdl:part name="parameters" element="tns:ConsultationSoldeRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="ConsultationSoldeResponse">
+        <wsdl:part name="parameters" element="tns:ConsultationSoldeResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="SoldeService">
+        <wsdl:operation name="consultationSolde">
+            <wsdl:input message="tns:ConsultationSoldeRequest"/>
+            <wsdl:output message="tns:ConsultationSoldeResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="SoldeServiceSoapBinding" type="tns:SoldeService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="consultationSolde">
+            <soap:operation soapAction="http://localhost:8080/consultation-solde/consultationSolde"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="SoldeService">
+        <wsdl:port name="SoldePort" binding="tns:SoldeServiceSoapBinding">
+            <soap:address location="http://localhost:8082/consultation-solde"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

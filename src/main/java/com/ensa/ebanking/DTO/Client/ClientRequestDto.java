@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientRequestDto {
+
+    private String ceiling;
     private String firstName;
     private String lastName;
     private String email;
