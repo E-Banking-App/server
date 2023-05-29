@@ -39,6 +39,9 @@ public class ClientBankAccountEntity implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+
+    double solde ;
+
     public ClientBankAccountEntity(Integer numero, String ceiling) {
         this.numero = numero;
         this.ceiling = ceiling;

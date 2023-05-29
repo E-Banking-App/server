@@ -3,7 +3,10 @@ package com.ensa.ebanking;
 import com.ensa.ebanking.Enums.Category;
 import com.ensa.ebanking.Models.*;
 import com.ensa.ebanking.Services.*;
+import com.ensa.ebanking.solde.ConsultationSoldeRequest;
+import com.ensa.ebanking.solde.ConsultationSoldeResponse;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,13 +15,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
 @SpringBootApplication
+@RestController
+//@CrossOrigin(origins = "*")
+
 public class EBankingApplication {
+
 	PasswordEncoder passwordEncoder;
+
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(EBankingApplication.class, args);

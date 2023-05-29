@@ -18,4 +18,14 @@ public class ClientService {
     public ClientEntity findByEmail(String email) {
         return clientDAO.findByEmail(email);
     }
+
+
+    public ClientEntity findByEmailAndPassword(String email) {
+        return clientDAO.findByEmail(email);
+    }
+
+    public boolean verifyPassword(String email, String password) {
+        ClientEntity client = findByEmail(email);
+        return client != null && client.getPassword().equals(password);
+    }
 }
