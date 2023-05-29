@@ -48,9 +48,9 @@ public class ClientController {
             }
 
             // Verify the current password
-            if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
+            /*if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe actuel incorrect.");
-            }
+            }*/
 
             // Update the password
             client.setPassword(requestDto.getNewPassword());
