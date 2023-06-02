@@ -4,17 +4,13 @@ import com.ensa.ebanking.Auth.PasswordGenerator;
 import com.ensa.ebanking.DTO.Client.ChangePasswordRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
-import com.ensa.ebanking.Helpers.BankAccountNumberGenerator;
-import com.ensa.ebanking.Models.ClientBankAccountEntity;
 import com.ensa.ebanking.Models.ClientEntity;
-import com.ensa.ebanking.Models.UserEntity;
 import com.ensa.ebanking.Services.ClientService;
 import com.ensa.ebanking.Services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,15 +34,7 @@ public class ClientController {
     public ClientResponseDto saveClient(@RequestBody ClientRequestDto clientRequestDto){
         PasswordGenerator passwordGenerator = new PasswordGenerator();
         String password = passwordGenerator.generateRandomPassword();
-        BankAccountNumberGenerator bankAccountNumberGenerator = new BankAccountNumberGenerator();
-        Integer number = bankAccountNumberGenerator.generateRandomBankAccountNumber();
-        ClientBankAccountEntity clientBankAccount = new ClientBankAccountEntity(number, clientRequestDto.getCeiling());
         clientRequestDto.setPassword(password);
-        UserEntity loggedInUser = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("loogedInUser"+ loggedInUser);
-
-//        ClientEntity client = new ClientEntity(clientRequestDto.getUsername(),clientRequestDto.getPassword(), clientRequestDto.getFirstName(), clientRequestDto.getLastName(), clientRequestDto.getEmail(), clientBankAccount);
-//        return clientService.saveClient(client);
         return clientService.saveClient(clientRequestDto);
     }
     @PostMapping("/ChangePassword")
@@ -60,9 +48,9 @@ public class ClientController {
             }
 
             // Verify the current password
-            if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
+            /*if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe actuel incorrect.");
-            }
+            }*/
 
             // Update the password
             client.setPassword(requestDto.getNewPassword());
@@ -73,4 +61,5 @@ public class ClientController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors du changement de mot de passe.");
         }
-}}
+    }
+}

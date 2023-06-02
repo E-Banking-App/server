@@ -23,9 +23,6 @@ public class ClientBankAccountEntity implements Serializable {
     private Integer numero;
     @Column(nullable = false)
     private String ceiling;
-
-    @Column(nullable = true)
-    private Double solde;
     /////////////// Relation ////////////////
     @OneToMany(mappedBy = "clientBankAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VirementEntity> virement;
@@ -41,7 +38,8 @@ public class ClientBankAccountEntity implements Serializable {
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
-
+    //added
+    double solde;
     public ClientBankAccountEntity(Integer numero, String ceiling) {
         this.numero = numero;
         this.ceiling = ceiling;

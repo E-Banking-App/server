@@ -41,4 +41,13 @@ public class BillEntity implements Serializable {
     private LocalDateTime updatedAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    // added
+    private String Creancier ;
+    private String Creance ;
+    // new added : au cas ou paiement par reference
+    @ManyToOne
+    @JoinColumn(name="reference")
+    private UserBill userBill ;
+    private int mois ;
 }
