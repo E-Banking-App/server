@@ -23,42 +23,42 @@ import java.util.Map;
 
 @Service
 public class BillService {
+//    @Autowired
+//    private final BillDAO billDAO;
+//    private final UserBillDAO userBillDAO;
+//
+//    @Autowired
+//    public BillService(BillDAO billDAO, UserBillDAO userBillDAO) {
+//        this.billDAO = billDAO;
+//        this.userBillDAO = userBillDAO;
+//    }
+//
+//    public BillEntity findByCreancierAndCreanceAndCode(String creancier, String creance, String code) {
+//        return billDAO.findByCreancierAndCreanceAndCode(creancier, creance, code);
+//    }
+//
+//    public float getBillAmount(String creancier, String creance, String factureNumber) {
+//        BillEntity bill = findByCreancierAndCreanceAndCode(creancier, creance, factureNumber);
+//        if (bill != null) {
+//            return bill.getAmount();
+//        }
+//        return -1.0f;
+//    }
+//
 
-    private final BillDAO billDAO;
-    private final UserBillDAO userBillDAO;
-
-    @Autowired
-    public BillService(BillDAO billDAO, UserBillDAO userBillDAO) {
-        this.billDAO = billDAO;
-        this.userBillDAO = userBillDAO;
-    }
-
-    public BillEntity findByCreancierAndCreanceAndCode(String creancier, String creance, String code) {
-        return billDAO.findByCreancierAndCreanceAndCode(creancier, creance, code);
-    }
-
-    public float getBillAmount(String creancier, String creance, String factureNumber) {
-        BillEntity bill = findByCreancierAndCreanceAndCode(creancier, creance, factureNumber);
-        if (bill != null) {
-            return bill.getAmount();
-        }
-        return -1.0f;
-    }
 
 
+//    public List<BillEntity> findByCreancierAndCreanceAndUserBillAndStatus(
+//            String creancier, String creance, UserBill userBill, Status status) {
+//        return billDAO.findByCreancierAndCreanceAndUserBillAndStatus(creancier, creance, userBill, status);
+//    }
 
-
-    public List<BillEntity> findByCreancierAndCreanceAndUserBillAndStatus(
-            String creancier, String creance, UserBill userBill, Status status) {
-        return billDAO.findByCreancierAndCreanceAndUserBillAndStatus(creancier, creance, userBill, status);
-    }
-
-    public BillEntity findByCode(String factureNumber) {
-        return billDAO.findByCode(factureNumber);
-    }
-
-    public BillEntity saveBill(BillEntity bill) {
-        return billDAO.save(bill);
-    }
+//    public BillEntity findByCode(String factureNumber) {
+//        return billDAO.findByCode(factureNumber);
+//    }
+//
+//    public BillEntity saveBill(BillEntity bill) {
+//        return billDAO.save(bill);
+//    }
 
 }

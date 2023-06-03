@@ -30,57 +30,57 @@ public class BillController {
         this.billService = billService;
         this.userBillService=userBillService;
     }
-    @PostMapping("/factureimpayees/{creancier}/{creance}/{referenceId}")
-    public ResponseEntity<List<Map<String, Object>>> getUnpaidInvoices(
-            @PathVariable String creancier,
-            @PathVariable String creance,
-            @PathVariable String referenceId
-    ) {
-        try {
-            UserBill userBill = userBillService.findById(referenceId);
+//    @PostMapping("/factureimpayees/{creancier}/{creance}/{referenceId}")
+//    public ResponseEntity<List<Map<String, Object>>> getUnpaidInvoices(
+//            @PathVariable String creancier,
+//            @PathVariable String creance,
+//            @PathVariable String referenceId
+//    ) {
+//        try {
+//            UserBill userBill = userBillService.findById(referenceId);
+//
+//            if (userBill == null) {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//            }
+//
+//            List<BillEntity> unpaidBills = billService.findByCreancierAndCreanceAndUserBillAndStatus(
+//                    creancier, creance, userBill, Status.PENDING);
+//
+//            List<Map<String, Object>> unpaidInvoices = new ArrayList<>();
+//
+//            for (BillEntity bill : unpaidBills) {
+//                Map<String, Object> invoice = new HashMap<>();
+//                invoice.put("numero", bill.getCode());
+//                invoice.put("mois", bill.getName());
+//                invoice.put("montant", bill.getAmount());
+//                unpaidInvoices.add(invoice);
+//            }
+//
+//            return ResponseEntity.ok(unpaidInvoices);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 
-            if (userBill == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            List<BillEntity> unpaidBills = billService.findByCreancierAndCreanceAndUserBillAndStatus(
-                    creancier, creance, userBill, Status.PENDING);
-
-            List<Map<String, Object>> unpaidInvoices = new ArrayList<>();
-
-            for (BillEntity bill : unpaidBills) {
-                Map<String, Object> invoice = new HashMap<>();
-                invoice.put("numero", bill.getCode());
-                invoice.put("mois", bill.getName());
-                invoice.put("montant", bill.getAmount());
-                unpaidInvoices.add(invoice);
-            }
-
-            return ResponseEntity.ok(unpaidInvoices);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GetMapping("/facture/{creancier}/{creance}/{factureNumber}/montant")
-    public ResponseEntity<Double> getBillAmount(
-            @PathVariable String creancier,
-            @PathVariable String creance,
-            @PathVariable String factureNumber
-    ) {
-        try {
-            Double billAmount;
-
-            if (creancier.equals("Lydec")) {
-                billAmount = 150.0;
-            } else {
-                billAmount = (double) billService.getBillAmount(creancier, creance, factureNumber);
-            }
-
-            return ResponseEntity.ok(billAmount);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+//    @GetMapping("/facture/{creancier}/{creance}/{factureNumber}/montant")
+//    public ResponseEntity<Double> getBillAmount(
+//            @PathVariable String creancier,
+//            @PathVariable String creance,
+//            @PathVariable String factureNumber
+//    ) {
+//        try {
+//            Double billAmount;
+//
+//            if (creancier.equals("Lydec")) {
+//                billAmount = 150.0;
+//            } else {
+//                billAmount = (double) billService.getBillAmount(creancier, creance, factureNumber);
+//            }
+//
+//            return ResponseEntity.ok(billAmount);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 
 }
