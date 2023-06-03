@@ -32,5 +32,10 @@ public class AuthenticationController {
     ){
         return ResponseEntity.ok(service.authenticate(request));
     }
-
+    @PostMapping("/authenticate/agent")
+    public ResponseEntity<AuthenticationResponse> authenticateAgent(
+            @RequestBody AuthenticationRequest request
+    ){
+        return ResponseEntity.ok(service.authenticate(request));
+    }
 }
