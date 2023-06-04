@@ -92,8 +92,6 @@ public class ClientEntity extends UserEntity {
     }
     public ClientEntity(String username, String password) {
         super(username, password);
-        this.firstName = firstName;
-
     }
 
     @Override

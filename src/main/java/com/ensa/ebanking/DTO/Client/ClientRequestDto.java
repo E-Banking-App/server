@@ -18,6 +18,7 @@ public class ClientRequestDto {
     private String ceiling;
     private String firstName;
     private String lastName;
+    private String telephone;
     private String email;
     private String username;
     private String password;
