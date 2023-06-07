@@ -87,8 +87,8 @@ public class ClientEntity extends UserEntity {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.createdBy = createdBy;
-        this.clientBankAccount = clientBankAccount;
+      //  this.createdBy = createdBy;
+        //this.clientBankAccount = clientBankAccount;
     }
     public ClientEntity(String username, String password) {
         super(username, password);

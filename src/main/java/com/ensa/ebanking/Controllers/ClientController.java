@@ -1,14 +1,17 @@
 package com.ensa.ebanking.Controllers;
 
 import com.ensa.ebanking.Auth.PasswordGenerator;
+import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
 import com.ensa.ebanking.DTO.Client.ChangePasswordRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
 import com.ensa.ebanking.Models.ClientEntity;
+import com.ensa.ebanking.Models.UserEntity;
 import com.ensa.ebanking.Services.ClientBankAccountService;
 import com.ensa.ebanking.Services.ClientService;
 import com.ensa.ebanking.Services.UserService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientController {
     private UserService clientService;
+    private final ModelMapper modelMapper;
     private ClientBankAccountService clientBankAccountService;
 
     @Autowired
@@ -34,11 +38,20 @@ public class ClientController {
 
     @PostMapping("")
     public ClientResponseDto saveClient(@RequestBody ClientRequestDto clientRequestDto){
+        //generate the password
         PasswordGenerator passwordGenerator = new PasswordGenerator();
         String password = passwordGenerator.generateRandomPassword();
         clientRequestDto.setPassword(password);
 
+        //get the agent : createby_id
+        List<AgentResponseDto> client = clientService.findByIdAgent(clientRequestDto.getCreatedBy_id());
+        System.out.println(client.get(0));
+
+        clientRequestDto.setCreatedBy_id(null);
+
         //clientRequestDto.setEmail(clientRequestDto.getEmail());//give the email same value as username
+        clientRequestDto.setCreatedBy(modelMapper.map(client.get(0),ClientEntity.class));
+
 
         return clientService.saveClient(clientRequestDto);
     }

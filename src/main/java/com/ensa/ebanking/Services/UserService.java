@@ -14,6 +14,7 @@ import com.ensa.ebanking.Models.AgentEntity;
 import com.ensa.ebanking.Models.ClientEntity;
 import com.ensa.ebanking.Models.UserEntity;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,19 +24,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
     private final ClientDAO clientDTO;
 
-    @Autowired
     private final AdminDAO adminDTO;
 
-    @Autowired
     private final AgentDAO agentDTO;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
     //------------------------ Client ------------------------//
     public ClientResponseDto saveClient(ClientRequestDto clientRequestDto){
         ClientEntity clientEntity=modelMapper.map(clientRequestDto,ClientEntity.class);
@@ -46,7 +44,7 @@ public class UserService {
         return clientDTO.findAll()
                 .stream()
                 .map(el->modelMapper.map(el,ClientResponseDto.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     //------------------------ Agent ------------------------//
@@ -62,15 +60,14 @@ public class UserService {
                 .map(el->modelMapper.map(el,AgentResponseDto.class))
                 .collect(Collectors.toList());
     }
-//    public List<AgentResponseDto> findByUsername(String username){
-//        return agentDTO.findByUsername(username)
-//                .stream()
-//                .map(el->modelMapper.map(el,AgentResponseDto.class))
-//                .collect(Collectors.toList());
-//    }
+    public List<AgentResponseDto> findByIdAgent(Long id) {
+        return agentDTO.findById(id).stream()
+                .map(el->modelMapper.map(el,AgentResponseDto.class))
+                .collect(Collectors.toList());
+    }
     public AgentResponseDto findByUsername(String username){
         AgentEntity agent=agentDTO.findByUsername(username);
-        return modelMapper.map(agent,AgentResponseDto.class);
+        return modelMapper.map(agent,AgentResponseDto.class)  ;
     }
 
 
