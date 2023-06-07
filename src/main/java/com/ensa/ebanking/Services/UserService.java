@@ -12,12 +12,14 @@ import com.ensa.ebanking.DTO.Client.ClientResponseDto;
 import com.ensa.ebanking.Models.AdminEntity;
 import com.ensa.ebanking.Models.AgentEntity;
 import com.ensa.ebanking.Models.ClientEntity;
+import com.ensa.ebanking.Models.UserEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,6 +61,16 @@ public class UserService {
                 .stream()
                 .map(el->modelMapper.map(el,AgentResponseDto.class))
                 .collect(Collectors.toList());
+    }
+//    public List<AgentResponseDto> findByUsername(String username){
+//        return agentDTO.findByUsername(username)
+//                .stream()
+//                .map(el->modelMapper.map(el,AgentResponseDto.class))
+//                .collect(Collectors.toList());
+//    }
+    public AgentResponseDto findByUsername(String username){
+        AgentEntity agent=agentDTO.findByUsername(username);
+        return modelMapper.map(agent,AgentResponseDto.class);
     }
 
 

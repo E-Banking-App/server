@@ -4,9 +4,14 @@ import com.ensa.ebanking.Auth.AuthenticationRequest;
 import com.ensa.ebanking.Auth.AuthenticationResponse;
 import com.ensa.ebanking.Auth.AuthenticationService;
 import com.ensa.ebanking.Auth.PasswordGenerator;
+import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
+import com.ensa.ebanking.Models.AgentEntity;
+import com.ensa.ebanking.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -14,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AuthenticationController {
     private final AuthenticationService service;
-//    @PostMapping("/register")
+    private final UserService agentService;
+
+
+    //    @PostMapping("/register")
 //    public ResponseEntity<AuthenticationResponse> register(
 //            @RequestBody RegisterRequest request
 //            ){
@@ -36,6 +44,14 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticateAgent(
             @RequestBody AuthenticationRequest request
     ){
-        return ResponseEntity.ok(service.authenticate(request));
+
+        //get the Agent from the DB
+        AgentResponseDto agentResponse= agentService.findByUsername(request.getUsername());
+        //affect the value to the response id and first Login
+        AuthenticationResponse response = service.authenticate(request);
+        response.setIsFirstLogin(agentResponse.getIsFirstLogin());
+        response.setId(agentResponse.getId());
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -38,7 +38,7 @@ public class ClientController {
         String password = passwordGenerator.generateRandomPassword();
         clientRequestDto.setPassword(password);
 
-        clientRequestDto.setEmail(clientRequestDto.getUsername());//give the email same value as username
+        //clientRequestDto.setEmail(clientRequestDto.getEmail());//give the email same value as username
 
         return clientService.saveClient(clientRequestDto);
     }

@@ -16,6 +16,7 @@ public class AgentResponseDto {
     private String cin;
     private String cinLink;
     private String location;
+    private Boolean isFirstLogin;
     private LocalDate birthDate;
     private String phoneNumber;
     private String irc;
