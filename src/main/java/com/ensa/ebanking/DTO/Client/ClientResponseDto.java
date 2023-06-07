@@ -1,13 +1,11 @@
 package com.ensa.ebanking.DTO.Client;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ClientResponseDto {
     private Long id;
     private String firstName;

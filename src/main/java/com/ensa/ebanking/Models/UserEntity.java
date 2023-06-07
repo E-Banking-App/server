@@ -28,10 +28,10 @@ public abstract class UserEntity implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+//    @Column(nullable = false)
+//    private LocalDateTime updatedAt = LocalDateTime.now();
+//    @Column(nullable = false)
+//    private LocalDateTime createdAt = LocalDateTime.now();
 
     public UserEntity(String username, String password) {
         this.username = username;
