@@ -5,6 +5,7 @@ import com.ensa.ebanking.DTO.Client.ChangePasswordRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
 import com.ensa.ebanking.Models.ClientEntity;
+import com.ensa.ebanking.Services.ClientBankAccountService;
 import com.ensa.ebanking.Services.ClientService;
 import com.ensa.ebanking.Services.UserService;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientController {
     private UserService clientService;
+    private ClientBankAccountService clientBankAccountService;
 
     @Autowired
     private ClientService service ;
@@ -35,6 +37,9 @@ public class ClientController {
         PasswordGenerator passwordGenerator = new PasswordGenerator();
         String password = passwordGenerator.generateRandomPassword();
         clientRequestDto.setPassword(password);
+
+        //clientRequestDto.setEmail(clientRequestDto.getEmail());//give the email same value as username
+
         return clientService.saveClient(clientRequestDto);
     }
     @PostMapping("/ChangePassword")
