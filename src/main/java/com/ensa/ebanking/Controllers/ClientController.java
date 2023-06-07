@@ -5,6 +5,7 @@ import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
 import com.ensa.ebanking.DTO.Client.ChangePasswordRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
+import com.ensa.ebanking.Models.ClientBankAccountEntity;
 import com.ensa.ebanking.Models.ClientEntity;
 import com.ensa.ebanking.Models.UserEntity;
 import com.ensa.ebanking.Services.ClientBankAccountService;
@@ -18,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 @RestController
 @RequestMapping("client")
@@ -43,17 +46,30 @@ public class ClientController {
         String password = passwordGenerator.generateRandomPassword();
         clientRequestDto.setPassword(password);
 
-        //get the agent : createby_id
-        List<AgentResponseDto> client = clientService.findByIdAgent(clientRequestDto.getCreatedBy_id());
-        System.out.println(client.get(0));
-
+        //get the agent : create_id
+        List<AgentResponseDto> agent = clientService.findByIdAgent(clientRequestDto.getCreatedBy_id());
         clientRequestDto.setCreatedBy_id(null);
 
-        //clientRequestDto.setEmail(clientRequestDto.getEmail());//give the email same value as username
-        clientRequestDto.setCreatedBy(modelMapper.map(client.get(0),ClientEntity.class));
+
+        //Affect the Agent id to Client
+        clientRequestDto.setCreatedBy(modelMapper.map(agent.get(0),ClientEntity.class));
 
 
-        return clientService.saveClient(clientRequestDto);
+        //create the Bank_Account
+        ClientResponseDto clientRepo= clientService.saveClient(clientRequestDto);
+        //System.out.println(clientRepo.getId());
+        List<ClientResponseDto> clients = clientService.findByIdClient(clientRepo.getId());
+        //System.out.println(clients);
+        ClientEntity clientObj = modelMapper.map(clients.get(0),ClientEntity.class) ;
+        //System.out.println(clientObj);
+
+
+        Random random = new Random();
+        ClientBankAccountEntity bank = new ClientBankAccountEntity(random.nextInt(99999) , clientRequestDto.getCeiling(), 500.0);
+        System.out.println(bank);
+        ClientBankAccountEntity banka= clientBankAccountService.createClientBankAccount(bank);
+
+        return clientRepo;
     }
     @PostMapping("/ChangePassword")
     public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequestDto requestDto) {

@@ -2,6 +2,7 @@ package com.ensa.ebanking.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ClientBankAccountEntity implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +41,20 @@ public class ClientBankAccountEntity implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
     //added
-    double solde;
-    public ClientBankAccountEntity(Integer numero, String ceiling) {
+    Double solde;
+    public ClientBankAccountEntity(Integer numero, String ceiling ) {
         this.numero = numero;
         this.ceiling = ceiling;
+    }
+    public ClientBankAccountEntity(Integer numero, String ceiling , Double solde , ClientEntity client) {
+        this.numero = numero;
+        this.ceiling = ceiling;
+        this.solde = solde;
+        this.client =  client;
+    }
+    public ClientBankAccountEntity(Integer numero, String ceiling , Double solde ) {
+        this.numero = numero;
+        this.ceiling = ceiling;
+        this.solde = solde;
     }
 }
