@@ -1,5 +1,6 @@
 package com.ensa.ebanking.Controllers;
 
+import com.ensa.ebanking.DTO.Client.MobileDonationRequestDto;
 import com.ensa.ebanking.DTO.Client.PaymentRequestDto;
 import com.ensa.ebanking.Enums.Status;
 import com.ensa.ebanking.Models.BillEntity;
@@ -17,21 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("paiement")
-
-public class PaymentController {
+@RequestMapping("donation")
+public class DonationController {
 
     @Autowired
     private ClientService clientService;
 
-    @Autowired
-    private BillService billService;
+
 
     @Autowired
     private CreditorService creditorService;
-
-    @PostMapping("/facture")
-    public ResponseEntity<String> performPayment(@RequestBody PaymentRequestDto paymentRequest) {
+    @PostMapping("/mobile")
+    public ResponseEntity<String> performPayment(@RequestBody MobileDonationRequestDto paymentRequest) {
         try {
             // Get the client based on the provided email
             ClientEntity client = clientService.findByEmail(paymentRequest.getEmail());
@@ -40,10 +38,7 @@ public class PaymentController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe incorrect ou client introuvable.");
             }
 
-            // Verify the client's password
-            if (!client.getPassword().equals(paymentRequest.getPassword())) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe incorrect.");
-            }
+
 
             // Check if the client's balance is sufficient
             if (client.getClientBankAccount().getSolde() < paymentRequest.getAmount()) {
@@ -59,21 +54,19 @@ public class PaymentController {
             // Save the updated client information
             clientService.saveClient(client);
 
-            String  factureNumber = paymentRequest.getReferenceOrFactureNumber();
-            BillEntity bill = billService.findByCode(factureNumber);
-            bill.setStatus(Status.valueOf("PAID"));
 
-            // Save the updated bill information
-            billService.saveBill(bill);
+
+
+
 
             CreditorEntity creancier  = creditorService.findByName(paymentRequest.getCreancier());
             double soldeCreancier = (creancier.getCompany().getCompanyBankAccount().getSolde())+(paymentRequest.getAmount());
             creancier.getCompany().getCompanyBankAccount().setSolde(soldeCreancier);
             creditorService.save(creancier);
 
-            return ResponseEntity.ok("Paiement effectué avec succès.");
+            return ResponseEntity.ok("Donation effectué avec succès.");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors du paiement.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors de la donation");
         }
     }
 

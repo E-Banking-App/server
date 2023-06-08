@@ -49,6 +49,8 @@ public class CreanceEntity implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+
+
     public CreanceEntity(String code, String name, CreditorEntity creditor, FormEntity form) {
         this.code = code;
         this.name = name;

@@ -25,7 +25,8 @@ public class BillEntity implements Serializable {
     private String name;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private Float amount;
+
+    private float amount;
 
     /////////////// Relation ////////////////
     @ManyToOne
@@ -42,12 +43,22 @@ public class BillEntity implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // added
-    private String Creancier ;
-    private String Creance ;
+    // new added
+
+    @ManyToOne
+    @JoinColumn(name = "creditor_id")
+    private CreditorEntity creancier ;
+
+    @ManyToOne
+    @JoinColumn(name = "creance_id")
+    private CreanceEntity creance;
+
+
     // new added : au cas ou paiement par reference
+
     @ManyToOne
     @JoinColumn(name="reference")
     private UserBill userBill ;
+
     private int mois ;
 }

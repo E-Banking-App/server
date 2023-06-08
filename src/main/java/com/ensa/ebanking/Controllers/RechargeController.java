@@ -8,17 +8,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
+@RequestMapping("recharge")
 public class RechargeController {
 
     @Autowired
     private ClientService clientService;
 
-    @PostMapping("/recharge")
+    @PostMapping("/internetsim")
     public ResponseEntity<String> recharge(@RequestBody Map<String, Object> request) {
         String email = (String) request.get("email");
         String password = (String) request.get("password");
@@ -38,7 +40,11 @@ public class RechargeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Solde insuffisant");
         }
 
-        // Effectuer la recharge !!!!!!!! a ajouter
+        double newClientBalance = clientBalance - amount ;
+        client.getClientBankAccount().setSolde(newClientBalance);
+        clientService.saveClient(client);
+
+        // Effectuer la recharge du numero  !!!!!!!! a ajouter
         // ...
 
         return ResponseEntity.ok("Recharge réussie");

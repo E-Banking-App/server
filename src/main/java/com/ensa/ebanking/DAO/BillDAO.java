@@ -10,13 +10,18 @@ import java.util.List;
 
 //@Repository
 public interface BillDAO extends JpaRepository<BillEntity, Long> {
-    //List<BillEntity> findByCreancierAndCreanceAndUserBillAndStatus(String creancier, String creance, UserBill userBill, Status status);
 
-//    BillEntity findByCreancierAndCreanceAndCode(String creancier, String creance, String billCode);
-//
-//    BillEntity findByCode(String  factureNumber);
-//
-//    BillEntity save(BillEntity bill);
+
+    List<BillEntity> findByCreancierAndCreanceAndUserBillAndStatus(String creancier, String creance, UserBill userBill, Status status);
+
+    BillEntity findByCode(String factureNumber);
+
+
+   BillEntity findByCreancierAndCreanceAndCode(String creancier, String creance, String billCode);
+
+
+
+    BillEntity save(BillEntity bill);
 
 
 }

@@ -5,6 +5,7 @@ import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
 import com.ensa.ebanking.DTO.Agent.ChangePasswordAgentDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
+import com.ensa.ebanking.DTO.Client.MobileChangePasswordRequestDto;
 import com.ensa.ebanking.Models.ClientBankAccountEntity;
 import com.ensa.ebanking.Models.ClientEntity;
 import com.ensa.ebanking.Services.ClientBankAccountService;
@@ -21,7 +22,7 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("client")
-@CrossOrigin
+@CrossOrigin("*")
 @AllArgsConstructor
 public class ClientController {
     private UserService clientService;
@@ -62,11 +63,20 @@ public class ClientController {
         return clientService.saveClient(clientRequestDto);
     }
 
-    @PostMapping("/change_password")
-    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordAgentDto requestDto) {
-        clientService.changePasswordClient( requestDto,requestDto.getNewPassword());
-        return null;
-    }
+
+    @PostMapping("/ChangePassword")
+    public ResponseEntity<String> changePassword(@RequestBody MobileChangePasswordRequestDto requestDto) {
+        try {
+            // Get the client based on the email : unique
+            ClientEntity client = service.findByEmail(requestDto.getEmail());
+
+            if (client == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client introuvable.");
+            }
+
+            // Verify the current password
+//            if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
+    
 
 
     //@PostMapping("/ChangePassword")
@@ -82,16 +92,36 @@ public class ClientController {
 //            // Verify the current password
 //            /*if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
 //                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe actuel incorrect.");
-//            }*/
-//
-//            // Update the password
-//            client.setPassword(requestDto.getNewPassword());
-//            client.setFirstLogin(false); // Assuming you want to mark the client as not first login after password change
-//            service.saveClient(client);
-//
-//            return ResponseEntity.ok("Mot de passe changé avec succès.");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors du changement de mot de passe.");
-//        }
-//    }
+//            }
+
+            // Update the password
+            client.setPassword(requestDto.getNewPassword());
+            client.setFirstLogin(false); //  mark the client as not first login after password change
+            service.saveClient(client);
+
+            return ResponseEntity.ok("Mot de passe changé avec succès.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors du changement de mot de passe.");
+        }
+    }
+
+  @PostMapping("/change_password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordAgentDto requestDto) {
+        clientService.changePasswordClient( requestDto,requestDto.getNewPassword());
+        return null;
+    }
+
+    @GetMapping("/clients/{email}/solde")
+    public ResponseEntity<Double> getClientSolde(@PathVariable String email) {
+        ClientEntity client = service.findByEmail(email);
+        if (client != null) {
+            double solde = client.getClientBankAccount().getSolde();
+            return ResponseEntity.ok(solde);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+
+    }
+
 }

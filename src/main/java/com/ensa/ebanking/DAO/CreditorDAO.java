@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CreditorDAO extends JpaRepository<CreditorEntity, Long> {
+
+
+    CreditorEntity findByName(String name);
     //public List<CreditorResponseDto> findll
     List<CreditorEntity> findByCategory(Category category);
 }
