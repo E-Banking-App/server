@@ -56,44 +56,37 @@ public class ClientController {
 
 
         //create the Bank_Account
-        ClientResponseDto clientRepo= clientService.saveClient(clientRequestDto);
-        //System.out.println(clientRepo.getId());
-        List<ClientResponseDto> clients = clientService.findByIdClient(clientRepo.getId());
-        //System.out.println(clients);
-        ClientEntity clientObj = modelMapper.map(clients.get(0),ClientEntity.class) ;
-        //System.out.println(clientObj);
-
-
         Random random = new Random();
         ClientBankAccountEntity bank = new ClientBankAccountEntity(random.nextInt(99999) , clientRequestDto.getCeiling(), 500.0);
-        System.out.println(bank);
         ClientBankAccountEntity banka= clientBankAccountService.createClientBankAccount(bank);
+        //affect the bank account to the client
+        clientRequestDto.setClientBankAccount(clientBankAccountService.findById(banka.getId()).get());
 
-        return clientRepo;
+        return clientService.saveClient(clientRequestDto);
     }
-    @PostMapping("/ChangePassword")
-    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequestDto requestDto) {
-        try {
-            // Get the client based on the phone number
-            ClientEntity client = service.findByEmail(requestDto.getEmail());
-
-            if (client == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client introuvable.");
-            }
-
-            // Verify the current password
-            /*if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe actuel incorrect.");
-            }*/
-
-            // Update the password
-            client.setPassword(requestDto.getNewPassword());
-            client.setFirstLogin(false); // Assuming you want to mark the client as not first login after password change
-            service.saveClient(client);
-
-            return ResponseEntity.ok("Mot de passe changé avec succès.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors du changement de mot de passe.");
-        }
-    }
+    //@PostMapping("/ChangePassword")
+//    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequestDto requestDto) {
+//        try {
+//            // Get the client based on the phone number
+//            ClientEntity client = service.findByEmail(requestDto.getEmail());
+//
+//            if (client == null) {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client introuvable.");
+//            }
+//
+//            // Verify the current password
+//            /*if (!client.getPassword().equals(requestDto.getCurrentPassword())) {
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe actuel incorrect.");
+//            }*/
+//
+//            // Update the password
+//            client.setPassword(requestDto.getNewPassword());
+//            client.setFirstLogin(false); // Assuming you want to mark the client as not first login after password change
+//            service.saveClient(client);
+//
+//            return ResponseEntity.ok("Mot de passe changé avec succès.");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur s'est produite lors du changement de mot de passe.");
+//        }
+//    }
 }

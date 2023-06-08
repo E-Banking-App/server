@@ -3,8 +3,10 @@ package com.ensa.ebanking.Controllers;
 import com.ensa.ebanking.Auth.PasswordGenerator;
 import com.ensa.ebanking.DTO.Agent.AgentRequestDto;
 import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
+import com.ensa.ebanking.DTO.Agent.ChangePasswordAgentDto;
 import com.ensa.ebanking.Services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,4 +71,10 @@ public class AgentController {
         }
         return agentService.saveAgent(agentRequestDto);
     }
-}
+    @PostMapping("/change_password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordAgentDto requestDto) {
+        agentService.changePassword( requestDto,requestDto.getNewPassword());
+        return null;
+        }
+
+    }
