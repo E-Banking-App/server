@@ -35,26 +35,26 @@ public class SoapClient {
         return response;
     }*/
 
-
-    public ConsultationSoldeResponse getLoanSolde(ConsultationSoldeRequest request) {
-        System.out.println("request2"+ request);
-        // Appel du Web service externe pour récupérer la réponse
-        template = new WebServiceTemplate(marshaller);
-        ConsultationSoldeResponse response = (ConsultationSoldeResponse) template.marshalSendAndReceive("http://localhost:8082/ws", request);
-
-        // Récupération du client en fonction du firstName depuis le DAO du client
-        ClientEntity client = clientDAO.findByFirstName(request.getFistName());
-
-        if (client != null && client.getClientBankAccount() != null) {
-            // Récupération du solde du compte bancaire du client
-            double balance = client.getClientBankAccount().getSolde();
-            response.setBalance(balance);
-        } else {
-            // Gérer le cas où aucun client ou compte bancaire n'est trouvé
-            response.setBalance(0.0);
-        }
-
-        return response;
-    }
+//
+//    public ConsultationSoldeResponse getLoanSolde(ConsultationSoldeRequest request) {
+//        System.out.println("request2"+ request);
+//        // Appel du Web service externe pour récupérer la réponse
+//        template = new WebServiceTemplate(marshaller);
+//        ConsultationSoldeResponse response = (ConsultationSoldeResponse) template.marshalSendAndReceive("http://localhost:8082/ws", request);
+//
+//        // Récupération du client en fonction du firstName depuis le DAO du client
+//        ClientEntity client = clientDAO.findByFirstName(request.getFistName());
+//
+//        if (client != null && client.getClientBankAccount() != null) {
+//            // Récupération du solde du compte bancaire du client
+//            double balance = client.getClientBankAccount().getSolde();
+//            response.setBalance(balance);
+//        } else {
+//            // Gérer le cas où aucun client ou compte bancaire n'est trouvé
+//            response.setBalance(0.0);
+//        }
+//
+//        return response;
+//    }
 
 }

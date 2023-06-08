@@ -55,7 +55,7 @@ public class EBankingApplication {
 			clientBankAccountService.createClientBankAccount(clientBankAccount1);
 			clientBankAccountService.createClientBankAccount(clientBankAccount2);
 			// Add Client On Initialization
-			ClientEntity client1 = new ClientEntity("0609454356", "password", "first Name", "last Name", "client@ensa.ma", agent1, clientBankAccount1);
+			ClientEntity client1 = new ClientEntity("0609454356", passwordEncoder.encode("password"), "first Name", "last Name", "client@ensa.ma", agent1, clientBankAccount1);
 			ClientEntity client2 = new ClientEntity("0609454357", "password", "first Name", "last Name", "client2@ensa.ma", admin, clientBankAccount2);
 			userService.createClient(client1);
 			userService.createClient(client2);

@@ -59,7 +59,10 @@ public class UserService {
                 .map(el->modelMapper.map(el,ClientResponseDto.class))
                 .toList();
     }
-
+    public ClientResponseDto findByUsernameClient(String username){
+        ClientEntity agent=clientDTO.findByUsername(username);
+        return modelMapper.map(agent,ClientResponseDto.class)  ;
+    }
     //------------------------ Agent ------------------------//
     public AgentResponseDto saveAgent(AgentRequestDto agentRequestDto){
         AgentEntity agentEntity=modelMapper.map(agentRequestDto,AgentEntity.class);
@@ -78,7 +81,7 @@ public class UserService {
                 .map(el->modelMapper.map(el,AgentResponseDto.class))
                 .collect(Collectors.toList());
     }
-    public AgentResponseDto findByUsername(String username){
+    public AgentResponseDto findByUsernameAgent(String username){
         AgentEntity agent=agentDTO.findByUsername(username);
         return modelMapper.map(agent,AgentResponseDto.class)  ;
     }
