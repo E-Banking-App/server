@@ -7,24 +7,29 @@ import com.ensa.ebanking.DTO.Admin.AdminRequestDto;
 import com.ensa.ebanking.DTO.Admin.AdminResponseDto;
 import com.ensa.ebanking.DTO.Agent.AgentRequestDto;
 import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
+import com.ensa.ebanking.DTO.Agent.ChangePasswordAgentDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
 import com.ensa.ebanking.Models.AdminEntity;
 import com.ensa.ebanking.Models.AgentEntity;
 import com.ensa.ebanking.Models.ClientEntity;
-import com.ensa.ebanking.Models.UserEntity;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserService {
 
     private final ClientDAO clientDTO;
@@ -34,6 +39,8 @@ public class UserService {
     private final AgentDAO agentDTO;
 
     private final ModelMapper modelMapper;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     //------------------------ Client ------------------------//
     public ClientResponseDto saveClient(ClientRequestDto clientRequestDto){
         ClientEntity clientEntity=modelMapper.map(clientRequestDto,ClientEntity.class);
@@ -42,6 +49,12 @@ public class UserService {
     }
     public List<ClientResponseDto> findAllClient(){
         return clientDTO.findAll()
+                .stream()
+                .map(el->modelMapper.map(el,ClientResponseDto.class))
+                .toList();
+    }
+    public List<ClientResponseDto> findByIdClient(Long id){
+        return clientDTO.findById(id)
                 .stream()
                 .map(el->modelMapper.map(el,ClientResponseDto.class))
                 .toList();
@@ -69,7 +82,17 @@ public class UserService {
         AgentEntity agent=agentDTO.findByUsername(username);
         return modelMapper.map(agent,AgentResponseDto.class)  ;
     }
-
+    public ResponseEntity<String> changePassword(ChangePasswordAgentDto requestDto,String password) {
+        if (password == null) {
+            // Return a bad request response if the password is null
+            return ResponseEntity.badRequest().body("Password cannot be null");
+        }
+        AgentEntity  agent=agentDTO.findById(requestDto.getId()).orElseThrow(() -> new RuntimeException("Agent not found"));
+        agent.setPassword(passwordEncoder.encode(password));
+        agent.setIsFirstLogin(false);
+        agentDTO.save(agent);
+        return null;
+    }
 
     //------------------------ Admin ------------------------//
     public AdminResponseDto saveAdmin(AdminRequestDto adminRequestDto){

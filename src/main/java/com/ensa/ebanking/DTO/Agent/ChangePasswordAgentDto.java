@@ -1,13 +1,17 @@
-package com.ensa.ebanking.DTO.Client;
+package com.ensa.ebanking.DTO.Agent;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChangePasswordRequestDto {
+@Builder
+public class ChangePasswordAgentDto {
     private Long id;
     private String newPassword;
+    private String confirmation;
+
 }
