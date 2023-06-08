@@ -73,7 +73,7 @@ public class AgentController {
     }
     @PostMapping("/change_password")
     public ResponseEntity<String> changePassword(@RequestBody ChangePasswordAgentDto requestDto) {
-        agentService.changePassword( requestDto,requestDto.getNewPassword());
+        agentService.changePasswordAgent( requestDto,requestDto.getNewPassword());
         return null;
         }
 
