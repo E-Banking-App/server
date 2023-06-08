@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class SoldeController {
 
 
-    @Autowired
-    private SoapClient client ;
-    @PostMapping("/getLoanSolde")
-    @ResponseBody
-    public ConsultationSoldeResponse invokeSoapClientToGetLoanStatus(@RequestBody ConsultationSoldeRequest request) {
-//        ConsultationSoldeRequest consultationSoldeRequest = new ConsultationSoldeRequest(request.getFistName());
-        System.out.println("request"+request);
-        return client.getLoanSolde(request);
-    }
+//    @Autowired
+//    private SoapClient client ;
+//    @PostMapping("/getLoanSolde")
+//    @ResponseBody
+//    public ConsultationSoldeResponse invokeSoapClientToGetLoanStatus(@RequestBody ConsultationSoldeRequest request) {
+////        ConsultationSoldeRequest consultationSoldeRequest = new ConsultationSoldeRequest(request.getFistName());
+//        System.out.println("request"+request);
+//        return client.getLoanSolde(request);
+//    }
 
 //    @PostMapping("/getsolde")
 //    @ResponseBody

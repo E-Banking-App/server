@@ -38,7 +38,7 @@ public class CreditorEntity implements Serializable {
     /////////////////////////////////////////
 
     /////////////// Relation ////////////////
-    @OneToMany(mappedBy = "creditor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "creditor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<BillAccountEntity> billaccount;
     /////////////////////////////////////////
 

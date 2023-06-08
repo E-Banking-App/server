@@ -12,6 +12,7 @@ public class ClientResponseDto {
     private String firstName;
     private String lastName;
     private String email;
+    private Boolean isFirstLogin;
     private String username;
     private String password;
     private Role role;
