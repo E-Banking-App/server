@@ -8,6 +8,7 @@ import com.ensa.ebanking.DAO.UserRepository;
 import com.ensa.ebanking.Models.AdminEntity;
 import com.ensa.ebanking.Models.AgentEntity;
 import com.ensa.ebanking.Models.ClientEntity;
+import com.ensa.ebanking.Models.UserEntity;
 import com.ensa.ebanking.Security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,17 +54,17 @@ public class AuthenticationService {
 
 
 
-//    public AuthenticationResponse register(RegisterRequest request) {
-//        var user = UserEntity.builder()
-//                .username(request.getUsername())
-//                .password(passwordEncoder.encode(request.getPassword()))
-//                .build();
-//        repository.save(user);
-//        var jwtToken = jwtService.generateToken(user);
-//        return AuthenticationResponse.builder()
-//                .token(jwtToken)
-//                .build();
-//    }
+    public AuthenticationResponse register(PasswordGenerator.RegisterRequest request) {
+        var user = UserEntity.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .build();
+        repository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(

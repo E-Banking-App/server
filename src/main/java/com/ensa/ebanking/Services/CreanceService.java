@@ -13,4 +13,6 @@ public class CreanceService {
         this.creanceDAO = creanceDAO;
     }
     public CreanceEntity createCreance(CreanceEntity creanceEntity) { return creanceDAO.save(creanceEntity);}
+
+
 }

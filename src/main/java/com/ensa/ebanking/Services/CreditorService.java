@@ -14,4 +14,14 @@ public class CreditorService {
     }
 
     public CreditorEntity createCreditor(CreditorEntity creditorEntity) { return creditorDAO.save(creditorEntity);}
+
+    public CreditorEntity findByName(String name ){
+        return creditorDAO.findByName(name);
+
+    }
+
+    public CreditorEntity save(CreditorEntity creancier) {
+        return creditorDAO.save(creancier);
+
+    }
 }

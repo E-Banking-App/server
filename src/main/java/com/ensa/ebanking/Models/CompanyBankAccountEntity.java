@@ -35,6 +35,8 @@ public class CompanyBankAccountEntity implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    private double solde ;
+
     public CompanyBankAccountEntity(Integer numero) {
         this.numero = numero;
     }
