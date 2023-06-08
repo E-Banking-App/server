@@ -14,5 +14,4 @@ public class CreanceService {
     }
     public CreanceEntity createCreance(CreanceEntity creanceEntity) { return creanceDAO.save(creanceEntity);}
 
-
 }

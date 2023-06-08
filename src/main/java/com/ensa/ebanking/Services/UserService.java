@@ -59,6 +59,24 @@ public class UserService {
                 .map(el->modelMapper.map(el,ClientResponseDto.class))
                 .toList();
     }
+    public ClientResponseDto findByUsernameClient(String username){
+        ClientEntity agent=clientDTO.findByUsername(username);
+        return modelMapper.map(agent,ClientResponseDto.class)  ;
+    }
+
+    public ResponseEntity<String> changePasswordClient(ChangePasswordAgentDto requestDto,String password) {
+        if (password == null) {
+            // Return a bad request response if the password is null
+            return ResponseEntity.badRequest().body("Password cannot be null");
+        }
+        ClientEntity agent=clientDTO.findById(requestDto.getId()).orElseThrow(() -> new RuntimeException("Agent not found"));
+        agent.setPassword(passwordEncoder.encode(password));
+        agent.setIsFirstLogin(false);
+        clientDTO.save(agent);
+        return null;
+    }
+
+
 
     //------------------------ Agent ------------------------//
     public AgentResponseDto saveAgent(AgentRequestDto agentRequestDto){
@@ -78,11 +96,11 @@ public class UserService {
                 .map(el->modelMapper.map(el,AgentResponseDto.class))
                 .collect(Collectors.toList());
     }
-    public AgentResponseDto findByUsername(String username){
+    public AgentResponseDto findByUsernameAgent(String username){
         AgentEntity agent=agentDTO.findByUsername(username);
         return modelMapper.map(agent,AgentResponseDto.class)  ;
     }
-    public ResponseEntity<String> changePassword(ChangePasswordAgentDto requestDto,String password) {
+    public ResponseEntity<String> changePasswordAgent(ChangePasswordAgentDto requestDto,String password) {
         if (password == null) {
             // Return a bad request response if the password is null
             return ResponseEntity.badRequest().body("Password cannot be null");

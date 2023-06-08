@@ -1,5 +1,6 @@
 package com.ensa.ebanking.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,18 +25,21 @@ public class CreanceEntity implements Serializable {
     private String name;
 
     /////////////// Relation ////////////////
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="creditorid")
     private CreditorEntity creditor;
     /////////////////////////////////////////
 
     /////////////// Relation ////////////////
+    @JsonIgnore
     @OneToMany(mappedBy = "creance", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BillAccountEntity> billaccount;
     /////////////////////////////////////////
 
     //private Integer formId;
     /////////////// Relation ////////////////
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "formId")
     private FormEntity form;
