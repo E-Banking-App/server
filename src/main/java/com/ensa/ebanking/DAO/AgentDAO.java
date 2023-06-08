@@ -9,4 +9,5 @@ public interface AgentDAO extends JpaRepository<AgentEntity, Long>  {
     AgentEntity findByUsername(String username);
 
     Optional<AgentEntity> findById(Long id);
+
 }

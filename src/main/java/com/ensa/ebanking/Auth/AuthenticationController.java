@@ -60,6 +60,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticateClinet(
             @RequestBody AuthenticationRequest request
     ){
+
         //get the Client from the DB
         ClientResponseDto clientResponse= clientService.findByUsernameClient(request.getUsername());
 

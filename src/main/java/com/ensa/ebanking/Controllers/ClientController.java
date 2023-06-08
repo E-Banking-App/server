@@ -2,6 +2,7 @@ package com.ensa.ebanking.Controllers;
 
 import com.ensa.ebanking.Auth.PasswordGenerator;
 import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
+import com.ensa.ebanking.DTO.Agent.ChangePasswordAgentDto;
 import com.ensa.ebanking.DTO.Client.ChangePasswordRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
@@ -64,6 +65,14 @@ public class ClientController {
 
         return clientService.saveClient(clientRequestDto);
     }
+
+    @PostMapping("/change_password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordAgentDto requestDto) {
+        clientService.changePasswordClient( requestDto,requestDto.getNewPassword());
+        return null;
+    }
+
+
     //@PostMapping("/ChangePassword")
 //    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequestDto requestDto) {
 //        try {
