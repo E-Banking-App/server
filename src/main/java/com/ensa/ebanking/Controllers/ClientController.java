@@ -3,24 +3,20 @@ package com.ensa.ebanking.Controllers;
 import com.ensa.ebanking.Auth.PasswordGenerator;
 import com.ensa.ebanking.DTO.Agent.AgentResponseDto;
 import com.ensa.ebanking.DTO.Agent.ChangePasswordAgentDto;
-import com.ensa.ebanking.DTO.Client.ChangePasswordRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientRequestDto;
 import com.ensa.ebanking.DTO.Client.ClientResponseDto;
 import com.ensa.ebanking.Models.ClientBankAccountEntity;
 import com.ensa.ebanking.Models.ClientEntity;
-import com.ensa.ebanking.Models.UserEntity;
 import com.ensa.ebanking.Services.ClientBankAccountService;
 import com.ensa.ebanking.Services.ClientService;
 import com.ensa.ebanking.Services.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @RestController
