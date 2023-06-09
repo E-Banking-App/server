@@ -63,6 +63,7 @@ public class EBankingApplication {
 			CompanyBankAccountEntity companyBankAccount = new CompanyBankAccountEntity(32435);
 			companyBankAccountService.createCompanyBankAccount(companyBankAccount);
 			// Add Company On Initialization
+			// Hehe
 			CompanyEntity company = new CompanyEntity("https://www.iam.ma/ImagesMarocTelecom/Phototh%C3%A8que/Images-grandes/maroc-telecom-bleu-fr-grande.jpg", "Maroc Telecom", companyBankAccount);
 			companyService.createCompany(company);
 			// Add Creditors On Initialization
