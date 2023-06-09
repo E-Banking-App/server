@@ -16,6 +16,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +31,7 @@ public class ClientController {
     private UserService clientService;
     private final ModelMapper modelMapper;
     private ClientBankAccountService clientBankAccountService;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private ClientService service ;
@@ -96,7 +99,8 @@ public class ClientController {
 //            }
 
             // Update the password
-            client.setPassword(requestDto.getNewPassword());
+//            client.setPassword(requestDto.getNewPassword());
+            client.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
             client.setFirstLogin(false); //  mark the client as not first login after password change
             service.saveClient(client);
 

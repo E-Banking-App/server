@@ -60,6 +60,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticateClinet(
             @RequestBody AuthenticationRequest request
     ){
+        System.out.println("jfdkkgf"+ request);
 
         //get the Client from the DB
         ClientResponseDto clientResponse= clientService.findByUsernameClient(request.getUsername());
@@ -67,6 +68,7 @@ public class AuthenticationController {
         //affect the value to the response id and first Login
         AuthenticationResponse response = service.authenticate(request);
         response.setIsFirstLogin(clientResponse.getIsFirstLogin());
+        response.setEmail(clientResponse.getEmail());
         response.setId(clientResponse.getId());
         return ResponseEntity.ok(response);
     }
