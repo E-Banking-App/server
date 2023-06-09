@@ -54,17 +54,17 @@ public class AuthenticationService {
 
 
 
-    public AuthenticationResponse register(PasswordGenerator.RegisterRequest request) {
-        var user = UserEntity.builder()
-                .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .build();
-        repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
-    }
+//    public AuthenticationResponse register(PasswordGenerator.RegisterRequest request) {
+//        var user = UserEntity.builder()
+//                .username(request.getUsername())
+//                .password(passwordEncoder.encode(request.getPassword()))
+//                .build();
+//        repository.save(user);
+//        var jwtToken = jwtService.generateToken(user);
+//        return AuthenticationResponse.builder()
+//                .token(jwtToken)
+//                .build();
+//    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
