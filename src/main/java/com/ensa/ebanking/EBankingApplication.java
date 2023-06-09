@@ -55,8 +55,8 @@ public class EBankingApplication {
 			clientBankAccountService.createClientBankAccount(clientBankAccount1);
 			clientBankAccountService.createClientBankAccount(clientBankAccount2);
 			// Add Client On Initialization
-			ClientEntity client1 = new ClientEntity("0609454356", passwordEncoder.encode("password"), "first Name", "last Name", "client@ensa.ma", agent1, clientBankAccount1);
-			ClientEntity client2 = new ClientEntity("0609454357", "password", "first Name", "last Name", "client2@ensa.ma", admin, clientBankAccount2);
+			ClientEntity client1 = new ClientEntity("0628523329", passwordEncoder.encode("password"), "first Name", "last Name", "client@ensa.ma", agent1, clientBankAccount1);
+			ClientEntity client2 = new ClientEntity("0609454357", passwordEncoder.encode("password"), "first Name", "last Name", "client2@ensa.ma", admin, clientBankAccount2);
 			userService.createClient(client1);
 			userService.createClient(client2);
 			// Add Company Bank Account On Initialization
@@ -68,8 +68,10 @@ public class EBankingApplication {
 			// Add Creditors On Initialization
 			CreditorEntity creditor1 = new CreditorEntity("23434", "IAM Recharges", Category.RECHARGE, company);
 			CreditorEntity creditor2 = new CreditorEntity("23435", "IAM Factures", Category.FACTURE, company);
+			CreditorEntity creditor3 = new CreditorEntity("23436", "ALCS", Category.DONATION, company);
 			creditorService.createCreditor(creditor1);
 			creditorService.createCreditor(creditor2);
+			creditorService.createCreditor(creditor3);
 			// Add Forms On Initialization
 			FormEntity form1 = new FormEntity();
 			FormEntity form2 = new FormEntity();
@@ -87,10 +89,12 @@ public class EBankingApplication {
 			CreanceEntity creance2 = new CreanceEntity("43894", "Produit Internet SIM", creditor2, form2);
 			CreanceEntity creance3 = new CreanceEntity("43895", "Produit Fix SIM", creditor2, form2);
 			CreanceEntity creance4 = new CreanceEntity("43896", "Produit Mobile SIM", creditor2, form2);
+			CreanceEntity creance5 = new CreanceEntity("43834", "Donation ALCS", creditor3, form2);
 			creanceService.createCreance(creance1);
 			creanceService.createCreance(creance2);
 			creanceService.createCreance(creance3);
 			creanceService.createCreance(creance4);
+			creanceService.createCreance(creance5);
 		};
 	}
 
